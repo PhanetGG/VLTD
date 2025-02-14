@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="jsevent.css" />
+    <title>Ehhhh</title>
+    <style>
+      body {
+        overflow: hidden;
+        position: relative;
+        background-color: pink;
+      }
+      .heart {
+        position: absolute;
+        font-size: 30px;
+        color: red;
+        animation: floatUp 5s linear infinite;
+      }
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="boximg">
+        <img
+          src="https://i.pinimg.com/originals/b6/0d/ea/b60deab993d0d205d0ae3abc0a79f598.gif"
+          alt=""
+        />
+      </div>
+      <h2 class="question">Sl b te ❤️😊</h2>
+      <div class="btn">
+        <button type="button" id="btnYes">Yes</button>
+        <button id="btnNo">No</button>
+      </div>
+    </div>
+    <script>
+      let isYesClicked = false; // Track if "Yes" was clicked
+
+      document.getElementById("btnYes").addEventListener("click", function () {
+        isYesClicked = true; // Set flag to disable "No" movement
+
+        let heartInterval = setInterval(() => {
+          for (let i = 0; i < 10; i++) {
+            createHeart();
+          }
+        }, 100); // Every 100ms, 10 hearts appear
+
+        setTimeout(() => {
+          clearInterval(heartInterval);
+
+          // Redirect to the YouTube link
+          window.location.href = "https://youtu.be/U6gcZLj9Gfs?si=7U7Shgo9LYPAE7nm";
+        }, 4000); // Stops after 5 seconds
+
+        // Remove the "No" button after "Yes" is clicked
+        document.getElementById("btnNo").remove();
+      });
+
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        document.body.appendChild(heart);
+
+        const startX = Math.random() * window.innerWidth;
+        heart.style.left = `${startX}px`;
+        heart.style.top = "100vh";
+        heart.style.fontSize = `${Math.random() * 40 + 20}px`; // Random size for variation
+
+        setTimeout(() => {
+          heart.remove();
+        }, 4000);
+      }
+
+      document.getElementById("btnNo").addEventListener("mouseover", function () {
+        if (!isYesClicked) {
+          // Move "No" button only if "Yes" is not clicked
+          this.style.position = "absolute";
+          this.style.top = Math.random() * window.innerHeight + "px";
+          this.style.left = Math.random() * window.innerWidth + "px";
+        }
+      });
+    </script>
+  </body>
+</html>
